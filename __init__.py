@@ -42,13 +42,29 @@ class PlayVlc(MycroftSkill):
     @intent_file_handler('vlc.play.intent')
     def handle_vlc_play(self, message):
         self.speak_dialog('vlc.play')
-
-        self.addPlaylist()
-        # print(player.addPlaylist())
-
-        self.play()
+        time.sleep(3)
+        try:
+            print('Fetching all music from Music directory.')
+            self.addPlaylist()
+            # print(player.addPlaylist())
+            print('Playing playlist of all the music')
+            self.play()
+        except Exception as e:
+            print('ERROR! VLC playing failed.')
+            print(e)
+            self.speak_dialog('vlc.sorry')
         # print(player.addPlaylist())
         # time.sleep(10)
+
+    @intent_file_handler('vlc.resume.intent')
+    def handle_vlc_resume(self, message):
+        try:
+            self.play()
+            print('VLC play Resuming')
+        except Exception as e:
+            print('ERROR! VLC resuming failed.')
+            print(e)
+            self.speak_dialog('vlc.resume')
 
     @intent_file_handler('vlc.pause.intent')
     def handle_vlc_pause(self, message):
@@ -67,6 +83,15 @@ class PlayVlc(MycroftSkill):
             print('ERROR! VLC next failed.')
             print(e)
             self.speak_dialog('vlc.next')
+
+    @intent_file_handler('vlc.previous.intent')
+    def handle_vlc_previous(self, message):
+        try:
+            self.next()
+        except Exception as e:
+            print('ERROR! VLC play previous failed.')
+            print(e)
+            self.speak_dialog('vlc.previous')
 
 
 def create_skill():
