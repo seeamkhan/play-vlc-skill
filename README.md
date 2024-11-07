@@ -16,7 +16,7 @@ Play music, playlist, mp3 files from local storage, local hdd or local memory of
 * "Play local music"
 
 ## Credits
-sparrow
+Abdul Quayum
 
 ## Category
 **Music & Audio**
